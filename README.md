@@ -2,28 +2,41 @@
 Client Project
 battleship
 
-- 2 people play
-- 1 player goes to page to create new game; set game up
-- another player could be directly invited or text, etc. to get second player
-- both players should place ships on board
-game play shows:
-- board with shots they’ve taken on other player’s board
-- maybe small version of their own board
-- enter coordinates (A2) to fire
-- taken to new page to say “hit” (and/or “you sunk x ship) or miss ; “waiting for new turn”
-- then taken back to game play page
-- old pirate age ship names
-- user 
+As a user I would like to...
+- go to homepage & start a new game w/ user names
+- invite another player using invite code
+- gameboard creation & place your ships
+- see hits/misses you've made on other players board
+    - stretch: your own board with hits & misses from other player
 
-- game detects winner
-- basic stats (shots fired, hit to miss ratio, first ship sunk, last ship sunk)
-- reminded if you hit a coordinate for a second time
+- player 1 gets first shot
+- player enters coordinates to fire shot (ex: A2)
+- if coords have been pervisoly entered, alert player
+- new page diplaying if it was hit/miss/sink, waiting on other player to fire
+  - stretch: ajaxify to keep on same page
+- player 2 repeats entering coordinates & new page
+- repeat unitl winner
 
-- light blue background
-- dark brown ships
-- piratey font
-- no black text (dark gray only)
-- clickable things should pop off the page
+- when a winner is determined, both players are taken to a stats page
+- stats page displays...
+  - who won
+  - number of shots fired
+  - hit/miss ratio
+  - first/last ship sunk
+- button to redirect back to homepage to start new game
+
+- have pirate styles...
+  - light blue background (like the sea)
+  - dark brown ships
+  - piratey font
+  - no black text (dark gray only)
+  - clickable things should pop off the page
+  - pirate ships
+  - kid friendly
+
+- heroku
+- travis
+- 12 Factor gem
 
 - open to new names for the game
 
