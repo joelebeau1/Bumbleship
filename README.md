@@ -1,5 +1,6 @@
 # Bumbleship
 Client Project
+Rails 5.0.2 Ruby 2.3.1
 battleship
 
 Bumbleship Crew:
