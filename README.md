@@ -2,6 +2,14 @@
 Client Project
 battleship
 
+Bumbleship Crew:
+Cap'n Stacy Dullblade
+Pirate Joe the Parrotless
+Frownin' Simon Barbossa
+Rough-Sailin' Katrina Slasher
+Pirate Tové the Rum-Swiller
+
+
 As a user I would like to...
 - go to homepage & start a new game w/ user names
 - invite another player using invite code
