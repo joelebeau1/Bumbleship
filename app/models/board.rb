@@ -5,4 +5,6 @@ class Board < ApplicationRecord
   has_many :cells
 
   validates :ships, length: { is: 5 }
+
+  accepts_nested_attributes_for :ships
 end
