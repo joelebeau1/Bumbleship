@@ -4,6 +4,5 @@ class Board < ApplicationRecord
   has_many :ships
   has_many :cells
 
-  # validates :ships, length: { is: 5 }
-
+  validates :ships, length: { is: 5 }
 end

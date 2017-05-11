@@ -34,13 +34,31 @@ describe "Game" do
 
     describe 'number of boards' do
       it 'must have two boards' do
-        game = Game.new(boards: [Board.new(player: Player.new(name: "test")), Board.new(player: Player.new(name: "test"))])
+        good_ship_params = {name: "test", length: 2}
+        board1 = Board.new(ships: [Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params)])
+        board2 = Board.new(ships: [Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params)])
+        board3 = Board.new(ships: [Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params),
+                                   Ship.new(good_ship_params)])
+        game = Game.new(boards: [board1, board2])
         game.valid?
-        expect(game.errors.messages[:boards]).to be_empty
-
-        empty_game = Game.new
+        expect(game.errors.messages[:boards]).to_not include("is the wrong length (should be 2 characters)")
+        empty_game = Game.new(boards: [board1])
         empty_game.valid?
-        expect(empty_game.errors.messages[:boards]).to_not be_empty
+        expect(empty_game.errors.messages[:boards]).to include("is the wrong length (should be 2 characters)")
+        empty_game = Game.new(boards: [board1, board2, board3])
+        empty_game.valid?
+        expect(empty_game.errors.messages[:boards]).to include("is the wrong length (should be 2 characters)")
       end
     end
   end
