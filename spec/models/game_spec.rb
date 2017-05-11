@@ -22,13 +22,13 @@ describe "Game" do
 
     describe 'number of players' do
       it 'must have two players' do
-        game = Game.new(players: [Player.new(name: 'joe'), Player.new(name: 'simon')])
+        game = build(:game_with_two_players)
         game.valid?
         expect(game.errors.messages[:players]).to be_empty
 
-        empty_game = Game.new
+        empty_game = build(:game_with_no_players)
         empty_game.valid?
-        expect(empty_game.errors.messages[:players]).to_not be_empty
+        expect(empty_game.errors.messages[:players]).to be_empty
       end
     end
 
