@@ -39,5 +39,6 @@ class Board < ApplicationRecord
     coordinates.each do |pair|
       self.cells << Cell.create(coordinates: pair, guessed: false)
     end
+    self.save
   end
 end
