@@ -1,4 +1,7 @@
-# Bumbleship
+# Bumbleship 
+
+[![Build Status](https://travis-ci.org/stacurry/Bumbleship.svg?branch=master)](https://travis-ci.org/stacurry/Bumbleship)
+
 Client Project
 Rails 5.0.2 Ruby 2.3.1
 battleship
