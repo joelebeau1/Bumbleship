@@ -60,7 +60,7 @@ describe "Game" do
         expect(one_board_game.errors.messages[:boards]).to_not include("is too long (maximum is 2 characters)")
 
         three_board_game = build(:game)
-        one_board_game.boards << board1 << board2 << board3
+        three_board_game.boards << board1 << board2 << board3
         three_board_game.valid?
         expect(three_board_game.errors.messages[:boards]).to include("is too long (maximum is 2 characters)")
       end

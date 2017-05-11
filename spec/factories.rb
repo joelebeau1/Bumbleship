@@ -1,29 +1,34 @@
 FactoryGirl.define do
+  sequence :player_name do |n|
+    "player#{n}"
+  end
+
+  sequence :ship_name do |n|
+    "ship#{n}"
+  end
+
+  sequence :secret_key_number, 100000 do |n|
+    key = 10**5 + n
+    key.to_s
+  end
+
   factory :game do
-    secret_key "123456"
+    secret_key { generate(:secret_key_number) }
   end
 
   factory :player do
-    sequence :name { |n| "player#{n}" }
+    name { generate(:player_name) }
   end
 
   factory :board do
-    player
-    game
   end
 
   factory :cell do
-    # sequence(:x_coordinate) { |n|  }
-    # sequence(:y_coordinate) {}
-
-    coordinates { "#{x_coordinate}#{y_coordinate}" }
     guessed { [true, false].sample }
-    board
   end
 
   factory :ship do
-    sequence :name { |n| "ship#{n}" }
+    name { generate(:ship_name) }
     length { rand(2..5) }
-    board
   end
 end

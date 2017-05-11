@@ -11,7 +11,7 @@ class Board < ApplicationRecord
 
 
   def row(letter)
-    self.cells.select do |cells|
+    self.cells.select do |cell|
       cell.coordinates[0] == letter
     end
   end
@@ -40,5 +40,6 @@ class Board < ApplicationRecord
     coordinates.each do |pair|
       self.cells << Cell.create(coordinates: pair, guessed: false)
     end
+    self.save
   end
 end
