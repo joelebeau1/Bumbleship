@@ -12,7 +12,7 @@ class Cell < ApplicationRecord
     elsif guessed && !ship_id
       "miss"
     elsif !guessed && ship_id
-
+      "ship" #consider returning ship_id?
     else
       nil
     end

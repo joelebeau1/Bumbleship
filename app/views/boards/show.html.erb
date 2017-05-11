@@ -1,8 +1,14 @@
 <table>
+  <tr>
+    <% (0..9).each do |column| %>
+      <th><%= column.to_s %></th>
+    <% end %>
+  </tr>
   <% @board.rows.each do |row| %>
   <tr>
+    <td><%= row.first.coordinates[0] %></td>
     <% row.each do |cell| %>
-      <td> <%= cell.display %></td>
+      <td><%= opponent_display(cell) %></td>
     <% end %>
   </tr>
   <% end %>
