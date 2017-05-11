@@ -22,47 +22,47 @@ describe "Game" do
 
     describe 'number of players' do
       it 'has no more than two players' do
-        game = Game.new(players: [Player.new(name: 'joe'), Player.new(name: 'simon')])
+        game = build(:game)
+        game.players << build(:player) << build(:player)
         game.valid?
         expect(game.errors.messages[:players]).to be_empty
 
-        empty_game = Game.new
+        empty_game = build(:game)
         empty_game.valid?
         expect(empty_game.errors.messages[:players]).to be_empty
-        too_full_game = Game.new(players: [Player.new(name: 'joe'), Player.new(name: 'simon'), Player.new(name: "stacy")])
+
+        too_full_game = build(:game)
+        too_full_game.players << build(:player) << build(:player) << build(:player)
         too_full_game.valid?
         expect(too_full_game.errors.messages[:players]).to_not be_empty
-
       end
     end
 
     describe 'number of boards' do
       it 'has no more than two boards' do
-        good_ship_params = {name: "test", length: 2}
-        board1 = Board.new(ships: [Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params)])
-        board2 = Board.new(ships: [Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params)])
-        board3 = Board.new(ships: [Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params),
-                                   Ship.new(good_ship_params)])
-        game = Game.new(boards: [board1, board2])
+        board1 = build(:board)
+        board2 = build(:board)
+        board3 = build(:board)
+        5.times do
+          board1.ships << build(:ship)
+          board2.ships << build(:ship)
+          board3.ships << build(:ship)
+        end
+
+        game = build(:game)
+        game.boards << board1 << board2
         game.valid?
         expect(game.errors.messages[:boards]).to_not include("is too long (maximum is 2 characters)")
-        empty_game = Game.new(boards: [board1])
-        empty_game.valid?
-        expect(empty_game.errors.messages[:boards]).to_not include("is too long (maximum is 2 characters)")
-        empty_game = Game.new(boards: [board1, board2, board3])
-        empty_game.valid?
-        expect(empty_game.errors.messages[:boards]).to include("is too long (maximum is 2 characters)")
+
+        one_board_game = build(:game)
+        one_board_game.boards << board1
+        one_board_game.valid?
+        expect(one_board_game.errors.messages[:boards]).to_not include("is too long (maximum is 2 characters)")
+
+        three_board_game = build(:game)
+        one_board_game.boards << board1 << board2 << board3
+        three_board_game.valid?
+        expect(three_board_game.errors.messages[:boards]).to include("is too long (maximum is 2 characters)")
       end
     end
   end
