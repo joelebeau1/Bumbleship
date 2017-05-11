@@ -1,4 +1,7 @@
 <h3>Enter coordinates below:</h3>
+
+<%= render partial: 'shared/errors', locals: { errors: @errors } if @errors %>
+
 <p>To place your ships, please enter the starting coordinate for each ship and choose whether or not you want it to go right (horizontal) or down (vertical) from the starting coordinate</p>
 <%= form_tag('/games') do %>
   <p>
