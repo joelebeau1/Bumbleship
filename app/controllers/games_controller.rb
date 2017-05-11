@@ -7,5 +7,9 @@ class GamesController <  ApplicationController
     # @errors = ["Error"]
   end
 
+  def create
+
+  end
+
 
 end
