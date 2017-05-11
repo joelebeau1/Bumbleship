@@ -1,3 +1,10 @@
 language: ruby
 rvm:
- - 2.3.1
+- 2.3.1
+deploy:
+  provider: heroku
+  api_key:
+    secure: l1Oo0Pt4bYbZhCMkE+rqsUdnCmV0MB3ROHddQHqzsJLyxyzgBff19UsmyNXZCaGQx+OGsw+7EqVBOIxENOpXdA7GiFfDpv+bMI7Is07QSQhRqwPvgEWtZce7YsJQOErWJlX+7AcWb7T9TOOSmCa6TfX40irNFN5dL02X75lfwmEdgr+xcRXAZkL2A92SLJYPTdiuEFelbVu09z9qBooOZZPxtg1wlpqcY9faYWG9l4omcDG0/qZg4vBFibtyaoHVAkgJa3C8iMd8SSz0BsZBXKYMhQRKnDqr/IZnULXCdYCKx1grNywqjTnsCCdssWIn6Z5enmWc1qf/QUmtSe3mPHlLP3tgbzYQIjR3WUxax3DRgrlyAcNRfYhDcT/Z4jCFmMDD9CoJQQU95cq0NdGI1EhgiRIx7HP10VB+cnwQNYaTvt3J8AnUittOF3opk+86uXybeXNS5fmXzjZnli9DB4/VyNCBCou24NpAnygfWJzD3X4BbgZCCtRm3TiAbVQ9N5sHzQsuqaeefE4lon4o6ELPi+IuYph32vFZTIsZt76stPhALXMqVTCxxzOErbHFoK+ZjAwfsAGD4MP7/0GYtvN3x884LvoM0hYsJvaYOJd/DpVKDvygiE3vBq1tgXahJgw7Ks2uwTe384vwijbcYwL66Dr+INKxE+G46FB53y8=
+  app: bumbleship
+  on:
+    repo: stacurry/Bumbleship
