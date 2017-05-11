@@ -1,6 +1,8 @@
 language: ruby
 rvm:
 - 2.3.1
+services:
+  - postgresql
 deploy:
   provider: heroku
   api_key:
@@ -8,3 +10,4 @@ deploy:
   app: bumbleship
   on:
     repo: stacurry/Bumbleship
+before_script: bundle exec rails db:setup
