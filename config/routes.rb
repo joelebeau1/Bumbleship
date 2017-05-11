@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "games#index"
+  root "games#show"
+
+  resources :games, only: [:show, :index]
 end

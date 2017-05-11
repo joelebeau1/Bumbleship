@@ -17,3 +17,17 @@
 * {
   font-family: 'IM Fell English SC', serif;
 }
+
+table {
+  border: 1px solid black;
+  min-width: 800px;
+  min-height: 800px;
+}
+
+th, .letter {
+  font-size: 2.0em;
+}
+
+td, th {
+  border: 1px dashed black;
+}

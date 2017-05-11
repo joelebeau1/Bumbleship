@@ -4,7 +4,7 @@ class Board < ApplicationRecord
   has_many :ships
   has_many :cells
 
-  validates :ships, length: { i3s: 5 }
+  validates :ships, length: { is: 5 }
   # validate :has_five_ships
 
   LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]

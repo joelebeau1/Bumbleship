@@ -6,15 +6,25 @@ class Cell < ApplicationRecord
   validates :guessed, inclusion: { in: [true, false ] }
   validates :guessed, exclusion: { in: [nil] }
 
-  def status
+  def own_status
     if guessed && ship_id
       "hit"
     elsif guessed && !ship_id
       "miss"
     elsif !guessed && ship_id
-      "ship" #consider returning ship_id?
+      "ship"
     else
-      nil
+      "water"
+    end
+  end
+
+   def opponent_status
+    if guessed && ship_id
+      "hit"
+    elsif guessed && !ship_id
+      "miss"
+    else
+      "water"
     end
   end
 end
