@@ -8,3 +8,4 @@ deploy:
   app: bumbleship
   on:
     repo: stacurry/Bumbleship
+  script: bundle exec rake db:test:prepare
