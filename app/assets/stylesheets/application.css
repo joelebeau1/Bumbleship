@@ -16,4 +16,95 @@
 
 * {
   font-family: 'IM Fell English SC', serif;
+  color: #37220D;
+  /*background-color: rgba(1 .8 .7 .5)*/
+}
+
+ol {
+  list-style-type: none;
+}
+
+input {
+  border: 2px solid #37220D;
+  border-radius: 10px;
+}
+
+input[type=submit] {
+  background-color: #008CBA; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2em;
+}
+
+input[type=radio]:checked {
+  border: 5px solid #0DFF92;
+}
+
+input[type=radio]:checked::before{
+  background: #008CBA;
+}
+
+body {
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3.5em;
+}
+
+.bottom-border {
+  border-bottom: 1px solid #37220D;
+}
+
+table {
+  border: 1px solid black;
+  min-width: 800px;
+  min-height: 800px;
+  margin: auto;
+}
+
+th, .letter {
+  font-size: 2.0em;
+  text-align: center;
+}
+
+.setup-board {
+  min-width: 300px;
+  min-height: 300px;
+}
+
+.setup-board td {
+  font-size: 1.2em;
+}
+
+.container {
+  text-align: center;
+}
+
+.setup-container {
+  font-size: 1.2em;
+  width: 59%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+    margin: 10px;
+}
+
+.setup-board-container {
+  width: 35%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+}
+
+
+td, th {
+  border: 1px dashed #37220D;
 }
