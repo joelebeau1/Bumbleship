@@ -1,0 +1,15 @@
+<table class="opponent-display-table">
+  <tr>
+    <% (0..9).each do |column| %>
+      <th><%= column.to_s %></th>
+    <% end %>
+  </tr>
+  <% @board.rows.each do |row| %>
+  <tr>
+    <td><%= row.first.coordinates[0] %></td>
+    <% row.each do |cell| %>
+      <td class="<%= cell.opponent_status %>"></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>

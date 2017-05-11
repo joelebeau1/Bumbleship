@@ -41,6 +41,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara', "~> 2.5"
   gem 'byebug', platform: :mri
+  gem "factory_girl_rails", "~> 4.0"
+  gem "pry"
 end
 
 group :development do

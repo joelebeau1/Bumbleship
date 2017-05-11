@@ -6,5 +6,4 @@ Rails.application.routes.draw do
   get "/games/:game_id/boards/:id/setup" => "boards#setup"
   get "/games/:game_id/boards/:id/play" => "boards#play"
   patch "/games/:game_id/boards/:id" => "boards#update"
-
 end
