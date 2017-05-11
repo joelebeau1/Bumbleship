@@ -1,0 +1,45 @@
+<h3>Enter coordinates below:</h3>
+<p>To place your ships, please enter the starting coordinate for each ship and choose whether or not you want it to go right (horizontal) or down (vertical) from the starting coordinate</p>
+<%= form_tag('/games') do %>
+  <p>
+    <%= label_tag 'Big ship, 5 space' %>
+    <%= text_field_tag '5ship' %>
+    <%= label_tag 'Right:' %>
+    <%= radio_button_tag 'allignment5', 'right' %>
+    <%= label_tag 'Down:' %>
+    <%= radio_button_tag 'allignment5', 'down' %>
+  </p>
+  <p>
+    <%= label_tag 'Pretty Big ship, 4 space' %>
+    <%= text_field_tag '4ship' %>
+    <%= label_tag 'Right:' %>
+    <%= radio_button_tag 'allignment4', 'right' %>
+    <%= label_tag 'Down:' %>
+    <%= radio_button_tag 'allignment4', 'down' %>
+  </p>
+  <p>
+    <%= label_tag 'Kinda Big ship, 3 space' %>
+    <%= text_field_tag '3ship' %>
+    <%= label_tag 'Right:' %>
+    <%= radio_button_tag 'allignment3', 'right' %>
+    <%= label_tag 'Down:' %>
+    <%= radio_button_tag 'allignment3', 'down' %>
+  </p>
+  <p>
+    <%= label_tag 'Small ship, 2 space' %>
+    <%= text_field_tag '2ship' %>
+    <%= label_tag 'Right:' %>
+    <%= radio_button_tag 'allignment2', 'right' %>
+    <%= label_tag 'Down:' %>
+    <%= radio_button_tag 'allignment2', 'down' %>
+  </p>
+  <p>
+    <%= label_tag 'Semi Big ship, 3 space' %>
+    <%= text_field_tag '1ship' %>
+    <%= label_tag 'Right:' %>
+    <%= radio_button_tag 'allignment1', 'right' %>
+    <%= label_tag 'Down:' %>
+    <%= radio_button_tag 'allignment1', 'down' %>
+  </p>
+  <p><%= submit_tag "let's play!" %></p>
+<% end %>

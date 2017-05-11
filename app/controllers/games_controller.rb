@@ -3,5 +3,8 @@ class GamesController <  ApplicationController
 
   end
 
+  def new
+  end
+
 
 end
