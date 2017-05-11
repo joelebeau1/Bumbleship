@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   resources :games, only: [:show, :index]
 
-  get 'games/:game_id/boards/:id/play', to: 'games#play'
+  get 'games/:game_id/boards/:id/play', to: 'boards#play'
 end

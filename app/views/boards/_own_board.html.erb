@@ -1,5 +1,6 @@
-<table class="opponent-display-table">
+<table class="own-display-table">
   <tr>
+    <th></th>
     <% (0..9).each do |column| %>
       <th><%= column.to_s %></th>
     <% end %>
@@ -8,7 +9,7 @@
   <tr>
     <td><%= row.first.coordinates[0] %></td>
     <% row.each do |cell| %>
-      <td class="<%= cell.opponent_status %>"></td>
+      <td class="<%= cell.own_status %>"></td>
     <% end %>
   </tr>
   <% end %>
