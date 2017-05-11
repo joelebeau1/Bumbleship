@@ -4,22 +4,10 @@ class Board < ApplicationRecord
   has_many :ships
   has_many :cells
 
-  validates :ships, length: { is: 5 }
-  # validate :has_five_ships
+  validates :ships, length: { maximum: 5 }
 
   LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
   NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
-
-  # def has_five_ships
-  #   unless self.ship_size == 2
-  #     errors.add(:ships, "game must have five ships")
-  #   end
-  # end
-
-  # def ship_size
-  #   self.ships.size
-  # end
 
   def row(letter)
     self.cells.select do |cells|
@@ -37,7 +25,7 @@ class Board < ApplicationRecord
     return rows
   end
 
-  def self.coordinates
+  def coordinates
     coordinates = []
     LETTERS.each do |letter|
       NUMBERS.each do |number|
@@ -48,8 +36,8 @@ class Board < ApplicationRecord
   end
 
   def generate_cells
-    Board.coordinates.each do |pair|
-      self.cells << Cell.create(coordinates: pair, guessed: false, )
+    coordinates.each do |pair|
+      self.cells << Cell.create(coordinates: pair, guessed: false)
     end
   end
 end

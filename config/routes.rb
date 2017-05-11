@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root "games#show"
 
   resources :games, only: [:show, :index]
+
+  get 'games/:game_id/boards/:id/play', to: 'games#play'
 end
