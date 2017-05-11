@@ -1,0 +1,89 @@
+<h1>Place your ships:</h1>
+ <div class="setup-board-container">
+  <table class="setup-board">
+    <tr>
+      <th></th>
+      <% for num in 0..9 %>
+        <th><%= num %></th>
+      <% end %>
+    </tr>
+    <% for letter in 'A'..'J' %>
+      <tr>
+      <td class="letter"><%= letter %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      </tr>
+    <% end %>
+  </table>
+ </div>
+
+  <div class="setup-container">
+
+
+  <%= render partial: 'shared/errors', locals: { errors: @errors } if @errors %>
+
+  <p>
+    <ol>
+      <li>For each ship...</li>
+      <li>Enter a starting coordinate (Example: A2)</li>
+      <li>Select which direction you want that ship to point</li>
+    </ol>
+  </p>
+
+  <%= form_tag({controller: "boards", action: "update"}, method: "patch") do %>
+    <p>
+      <%= label_tag 'Big ship, 5 spaces' %>
+      <%= text_field_tag 'board[ship5[coordinate]]' %>
+      <%= hidden_field_tag 'board[ship5[length]]', '5' %>
+      <%= label_tag 'Right:' %>
+      <%= radio_button_tag 'board[ship5[alignment]]', 'right' %>
+      <%= label_tag 'Down:' %>
+      <%= radio_button_tag 'board[ship5[alignment]]', 'down' %>
+    </p>
+    <p>
+      <%= label_tag 'Pretty Big ship, 4 spaces' %>
+      <%= text_field_tag 'board[ship4[coordinate]]' %>
+      <%= hidden_field_tag 'board[ship4[length]]', '4' %>
+      <%= label_tag 'Right:' %>
+      <%= radio_button_tag 'board[ship4[alignment]]', 'right' %>
+      <%= label_tag 'Down:' %>
+      <%= radio_button_tag 'board[ship4[alignment]]', 'down' %>
+    </p>
+    <p>
+      <%= label_tag 'Kinda Big ship, 3 spaces' %>
+      <%= text_field_tag 'board[ship3[coordinate]]' %>
+      <%= hidden_field_tag 'board[ship3[length]]', '3' %>
+      <%= label_tag 'Right:' %>
+      <%= radio_button_tag 'board[ship3[alignment]]', 'right' %>
+      <%= label_tag 'Down:' %>
+      <%= radio_button_tag 'board[ship3[alignment]]', 'down' %>
+    </p>
+    <p>
+      <%= label_tag 'Small ship, 2 spaces' %>
+      <%= text_field_tag 'board[ship2[coordinate]]' %>
+      <%= hidden_field_tag 'board[ship2[length]]', '2' %>
+      <%= label_tag 'Right:' %>
+      <%= radio_button_tag 'board[ship2[alignment]]', 'right' %>
+      <%= label_tag 'Down:' %>
+      <%= radio_button_tag 'board[ship2[alignment]]', 'down' %>
+    </p>
+    <p>
+      <%= label_tag 'Semi Big ship, 3 spaces' %>
+      <%= text_field_tag 'board[ship3[coordinate]]' %>
+      <%= hidden_field_tag 'board[ship3[length]]', '3' %>
+      <%= label_tag 'Right:' %>
+      <%= radio_button_tag 'board[ship3[alignment]]', 'right' %>
+      <%= label_tag 'Down:' %>
+      <%= radio_button_tag 'board[ship3[alignment]]', 'down' %>
+    </p>
+    <p><%= submit_tag "let's play!" %></p>
+  <% end %>
+  </div>
