@@ -10,4 +10,4 @@ deploy:
   app: bumbleship
   on:
     repo: stacurry/Bumbleship
-before_script: be rails db:setup
+before_script: bundle exec rails db:setup
