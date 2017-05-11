@@ -1,0 +1,9 @@
+<table>
+  <% @board.rows.each do |row| %>
+  <tr>
+    <% row.each do |cell| %>
+      <td> <%= cell.display %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
