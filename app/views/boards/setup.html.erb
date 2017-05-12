@@ -2,24 +2,24 @@
  <div class="setup-board-container">
   <table class="setup-board">
     <tr>
-      <th></th>
+      <th class="index-label"></th>
       <% for num in 0..9 %>
-        <th><%= num %></th>
+        <th class="index-label"><%= num %></th>
       <% end %>
     </tr>
     <% for letter in 'A'..'J' %>
       <tr>
-      <td class="letter"><%= letter %></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td class="letter index-label"><%= letter %></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
+      <td class="water"></td>
       </tr>
     <% end %>
   </table>

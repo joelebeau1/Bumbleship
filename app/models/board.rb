@@ -6,7 +6,6 @@ class Board < ApplicationRecord
 
   validates :ships, length: { maximum: 5 }
 
-
   LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
   NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
@@ -26,7 +25,6 @@ class Board < ApplicationRecord
     return rows
   end
 
-
   def coordinates
     coordinates = []
     LETTERS.each do |letter|
@@ -39,7 +37,7 @@ class Board < ApplicationRecord
 
   def generate_cells
     coordinates.each do |pair|
-      self.cells << Cell.create(coordinates: pair, guessed: false)
+      self.cells.create(coordinates: pair, guessed: false)
     end
     self.save
   end

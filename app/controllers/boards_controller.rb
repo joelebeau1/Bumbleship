@@ -1,11 +1,11 @@
 class BoardsController < ApplicationController
-
-  def setup
-
+  def play
+    @game = Game.find(params[:game_id])
+    @own_board = Board.find(params[:id])
+    @opp_board = @game.opp_board
   end
 
-  def play
-
+  def setup
   end
 
   def update
@@ -17,7 +17,6 @@ class BoardsController < ApplicationController
   def board_params
     params.require
   end
-
 
   # STYLES: input text field font size; side-by-side?
 
