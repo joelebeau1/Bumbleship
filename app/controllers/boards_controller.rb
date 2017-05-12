@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
 
-    board_[arams.each_pair do |placeholder, attributes|
+    board_params.each_pair do |placeholder, attributes|
       ship = @board.ships.where(name: attributes[:name]).first
       if !valid_coordinates?(attributes[:coordinate])
         ship.errors[:base] << "Invalid starting coordinate for your #{attributes[:name]}, please choose a valid coordinate"
