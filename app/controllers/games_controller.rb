@@ -7,8 +7,24 @@ class GamesController <  ApplicationController
 
   end
 
-  def create
+  def join
+    secret_key = params[:secret_key]
+    if (game = Game.find_by(secret_key: secret_key))
+      redirect_to new_game_player(game)
+    else
+      @errors = ["Secret key not found, matey... :("]
+      render :new
+    end
+  end
 
+  def create
+    @game = Game.new
+    if @game.save
+      redirect_to new_game_player_path(@game)
+    else
+      @errors = @game.errors.full_messages
+      render :new
+    end
   end
 
   def show
