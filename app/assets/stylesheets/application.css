@@ -85,12 +85,6 @@ td, th {
 }
 
 /* CELL STATUS DISPLAY STYLES */
-
-/* to discuss:  blue background on all, or only water?
-                cell coordinates on all, or only water?
-                coordinates on own board?
-                coordinates on setup board?
-*/
 .water {
   background-color: #ABD4DD;
 }
