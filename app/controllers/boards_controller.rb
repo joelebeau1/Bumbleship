@@ -10,16 +10,8 @@ class BoardsController < ApplicationController
 
   def update
     @board = Board.find(params[:id])
-    p "%%%%%%%%%%%%%%%%%%%%%%%%%"
-    p board_params.length
-    p "%%%%%%%%%%%%%%%%%%%%%%%%%"
     board_params.each do |_placeholder, attributes|
-      p "!" * 16
-      p _placeholder
-      p attributes
-      p "!" * 16
       ship = @board.ships.where(name: attributes[:name]).first
-      puts "#{ship.name} BEFORE BREAK ONE ================!"
       # unless valid_coordinates?(attributes[:coordinate])
       #   ship.errors[:base] << "Invalid starting coordinate for your #{attributes[:name]}, please choose a valid coordinate"
       #   ship.save
@@ -34,12 +26,9 @@ class BoardsController < ApplicationController
       # if overlapping?(@board, coordinates)
       #   ship.errors[:base] << "Your #{attributes[:name]} is overlapping with another ship, please choose a different place for your #{attributes[:name]}"
       #   ship.save
-      ship.save
+      # ship.save
       # end
-      p ship.errors
-      break if ship.errors.any?
-      puts "#{ship.name} AFTER BREAK Three ================"
-
+      # break if ship.errors.any?
       coordinates.each do |coords|
         # BUG: binding.pry was not hit when run from this linke
         ship.cells << @board.cells.where(coordinates: coords).first
@@ -47,17 +36,15 @@ class BoardsController < ApplicationController
       end
     end
 
-    if all_ships_valid?(@board)
-      p "MORE SHIT"
+    # if all_ships_valid?(@board)
       @board.save
       Game.find(params[:game_id]).save
       redirect_to "/games/#{params[:game_id]}/boards/#{params[:id]}/play"
-    else
-      p "MORE SHIT D:"
-      @errors = []
-      @board.ships.each { |ship| @errors << ship.errors.full_messages }
-      render 'setup'
-    end
+    # else
+    #   @errors = []
+    #   @board.ships.each { |ship| @errors << ship.errors.full_messages }
+    #   render 'setup'
+    # end
   end
 
   def fire
@@ -73,7 +60,6 @@ class BoardsController < ApplicationController
         redirect_to game_show_path(@game)
       else
         # TODO: hook up with WebSockets here
-        p @result
         flash[:notice] = "We'll change this later, but for now the result is #{@result}"
         redirect_to game_board_play_path(@game, @own_board)
       end
@@ -90,20 +76,12 @@ class BoardsController < ApplicationController
     params.require(:board).permit(ship1: [:name, :coordinate, :length, :alignment], ship2: [:name, :coordinate, :length, :alignment], ship3: [:name, :coordinate, :length, :alignment], ship4: [:name, :coordinate, :length, :alignment], ship5: [:name, :coordinate, :length, :alignment])
   end
 
-  .permit(array: [])
-
-  def all_ships_valid?(board)
-    p "+"
-    p board.ships
-    p "+"
-    board.ships.each do |ship|
-      p "-"
-      p ship.errors
-      p "-"
-      return false if ship.errors.any?
-    end
-    true
-  end
+  # def all_ships_valid?(board)
+  #   board.ships.each do |ship|
+  #     return false if ship.errors.any?
+  #   end
+  #   true
+  # end
 
   def coordinates_occupied(ship, attributes)
     cells = []
@@ -135,7 +113,7 @@ class BoardsController < ApplicationController
     end
 
     cells << starting_coordinate
-    cells.each { |coord| ship.cells.create(coordinates: coord, guessed: false, board: ship.board)}
+    cells
   end
 
 
