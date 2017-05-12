@@ -27,6 +27,10 @@ class Board < ApplicationRecord
   end
 
 
+  def guess(coordinates)
+    cells.find_cell_by_coordinates(coordinates).fire_on
+  end
+
   def coordinates
     coordinates = []
     LETTERS.each do |letter|
@@ -42,5 +46,11 @@ class Board < ApplicationRecord
       self.cells << Cell.create(coordinates: pair, guessed: false)
     end
     self.save
+  end
+
+  private
+
+  def self.find_cell_by_coordinates(coordinates)
+    find_by(coordinates: coordinates)
   end
 end
