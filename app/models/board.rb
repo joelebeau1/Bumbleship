@@ -28,7 +28,7 @@ class Board < ApplicationRecord
 
 
   def guess(coordinates)
-    cells.find_cell_by_coordinates(coordinates).fire_on
+    cells.find_by(coordinates: coordinates).fire_on
   end
 
   def coordinates
@@ -50,7 +50,4 @@ class Board < ApplicationRecord
 
   private
 
-  def self.find_cell_by_coordinates(coordinates)
-    find_by(coordinates: coordinates)
-  end
 end

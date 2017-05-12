@@ -5,30 +5,34 @@ class BoardsController < ApplicationController
   end
 
   def play
-
+    @game = Game.find(params[:game_id])
+    @own_board = Board.find(params[:id])
+    @opp_board = (@game.boards - [@own_board]).first
+    # TODO: put this in the correct view file
+    render "_fire_form"
   end
 
   def update
     p params
   end
 
-  private
-
-  def board_params
-    params.require
-  end
-
   def fire
     @game = Game.find(params[:game_id])
     @own_board = Board.find(params[:id])
-    @opp_board = (game.boards - [@own_board]).first
-    @result = opp_board.guess(params[:coordinates])
+    @opp_board = (@game.boards - [@own_board]).first
+    @result = @opp_board.guess(params[:coordinates])
     if game.over?
       redirect_to game_show_path(game)
     else
       # TODO: hook up with WebSockets here
       render game_board_play(@game, @own_board)
     end
+  end
+
+  private
+
+  def board_params
+    params.require
   end
 
 
