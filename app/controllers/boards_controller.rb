@@ -27,11 +27,15 @@ class BoardsController < ApplicationController
       break if ship.errors.any?
 
       coordinates.each do |coords|
-        ship.cells << Board.cells.where(coordinates: coords)
+        ship.cells << @board.cells.where(coordinates: coords).first
+        ship.save
       end
     end
 
     if all_ships_valid?(@board)
+      @board.save
+      Game.find(params[:game_id]).save
+      p @board.ships.select { |ship| ship.cells.count > 0 }
       redirect_to "/games/#{params[:game_id]}/boards/#{params[:id]}/play"
     else
       @errors = []
@@ -48,7 +52,6 @@ class BoardsController < ApplicationController
   def all_ships_valid?(board)
     board.ships.each do |ship|
       return false if ship.errors.any?
-      ship.save
     end
     true
   end
