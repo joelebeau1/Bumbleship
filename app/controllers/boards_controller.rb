@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
 
-    params[:board].each_pair do |ship_num, attributes|
+    board_[arams.each_pair do |placeholder, attributes|
       ship = @board.ships.where(name: attributes[:name]).first
       if !valid_coordinates?(attributes[:coordinate])
         ship.errors[:base] << "Invalid starting coordinate for your #{attributes[:name]}, please choose a valid coordinate"
@@ -27,6 +27,7 @@ class BoardsController < ApplicationController
       break if ship.errors.any?
 
       coordinates.each do |coords|
+        # BUG: binding.pry was not hit when run from this linke
         ship.cells << @board.cells.where(coordinates: coords).first
         ship.save
       end
@@ -46,7 +47,7 @@ class BoardsController < ApplicationController
 
   private
   def board_params
-    params.require(:board).permit(ships_attributes: [:coordinate, :length, :alignment, :name])
+    params.require(:board).permit(ship1: [:name, :coordinate, :length, :alignment], ship2: [:name, :coordinate, :length, :alignment], ship3: [:name, :coordinate, :length, :alignment], ship4: [:name, :coordinate, :length, :alignment], ship5: [:name, :coordinate, :length, :alignment])
   end
 
   def all_ships_valid?(board)
