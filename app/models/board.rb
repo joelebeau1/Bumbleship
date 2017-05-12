@@ -4,6 +4,7 @@ class Board < ApplicationRecord
   has_many :ships
   has_many :cells
 
+  accepts_nested_attributes_for :ships
   validates :ships, length: { maximum: 5 }
 
   LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
