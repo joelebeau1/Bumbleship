@@ -19,12 +19,11 @@ class PlayersController <  ApplicationController
       @board.player = @player
       @game = Game.find(params[:id])
       @board.game = @game
-      # TODO: incorporate correct ship names and sizes from Joe and Tove's code
-      @board.ships = [Ship.create(name: "TODO", length: 2),
-                      Ship.create(name: "TODO", length: 3),
-                      Ship.create(name: "TODO", length: 3),
-                      Ship.create(name: "TODO", length: 4),
-                      Ship.create(name: "TODO", length: 5)]
+      @board.ships = [Ship.create(name: "Queen Anne's Revenge", length: 5),
+                      Ship.create(name: "Frigate", length: 4),
+                      Ship.create(name: "Galleon", length: 3),
+                      Ship.create(name: "Sloop", length: 2),
+                      Ship.create(name: "Galley", length: 3)]
       if @board.save
         # TODO maybe: refactor generate_cells into after_save callback for board?
         @board.generate_cells

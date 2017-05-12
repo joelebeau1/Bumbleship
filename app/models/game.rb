@@ -39,16 +39,18 @@ class Game < ApplicationRecord
 
   def last_ship_sunk
     last_sunk_time = loser_board.ships.maximum(:sunk_time)
-    Ship.find_by(sunk_time: last_sunk_time)
+    ships.find_by(sunk_time: last_sunk_time)
   end
 
   def first_ship_sunk
     first_board_first_ship_sunk_time = boards.first.ships.minimum(:sunk_time)
     last_board_first_ship_sunk_time = boards.last.ships.minimum(:sunk_time)
+    # return nil if no ships have been sunk
+    return nil unless first_board_first_ship_sunk_time && last_board_first_ship_sunk_time
     if first_board_first_ship_sunk_time < last_board_first_ship_sunk_time
-      Ship.find_by(sunk_time: first_board_first_ship_sunk_time)
+      ships.find_by(sunk_time: first_board_first_ship_sunk_time)
     else
-      Ship.find_by(sunk_time: last_board_first_ship_sunk_time)
+      ships.find_by(sunk_time: last_board_first_ship_sunk_time)
     end
   end
 

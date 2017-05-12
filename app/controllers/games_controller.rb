@@ -28,16 +28,20 @@ class GamesController <  ApplicationController
   end
 
   def show
-    @numbers = (0..9)
-    @letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    #TODO check if game is over
+    #TODO uncomment so we can use this after styling is set
     @game = Game.find(params[:id])
-    @winner = @game.winner
-    @player_1 = @game.players.first
-    @player_2 = @game.players.last
-    @player_1_hit_miss_ratio = @player_1.boards.where(game_id: @game.id).hit_miss_ratio
-    @player_2_hit_miss_ratio = @player_2.boards.where(game_id: @game.id).hit_miss_ratio
-    @first_ship_sunk = @game.first_ship_sunk
-    @last_ship_sunk = @game.last_ship_sunk
+    if @game.over?
+      redirect_to game_board_play_path(@game)
+    else
+      @winner = @game.winner
+      @player_1 = @game.players.first
+      @player_2 = @game.players.last
+      @player_1_total_shots_fired = @player_1.boards.find_by(game_id: @game.id).cells.already_guessed.count
+      @player_1_hit_miss_ratio = @player_1.boards.find_by(game_id: @game.id).hit_miss_ratio
+      @player_2_total_shots_fired = @player_2.boards.find_by(game_id: @game.id).cells.already_guessed.count
+      @player_2_hit_miss_ratio = @player_2.boards.find_by(game_id: @game.id).hit_miss_ratio
+      @first_ship_sunk = @game.first_ship_sunk
+      @last_ship_sunk = @game.last_ship_sunk
+    end
   end
 end
