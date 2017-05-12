@@ -11,9 +11,9 @@ class BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
 
-    board_params.each_pair do |placeholder, attributes|
+    board_params.each do |_placeholder, attributes|
       ship = @board.ships.where(name: attributes[:name]).first
-      if !valid_coordinates?(attributes[:coordinate])
+      unless valid_coordinates?(attributes[:coordinate])
         ship.errors[:base] << "Invalid starting coordinate for your #{attributes[:name]}, please choose a valid coordinate"
       end
       break if ship.errors.any?
@@ -36,7 +36,6 @@ class BoardsController < ApplicationController
     if all_ships_valid?(@board)
       @board.save
       Game.find(params[:game_id]).save
-      p @board.ships.select { |ship| ship.cells.count > 0 }
       redirect_to "/games/#{params[:game_id]}/boards/#{params[:id]}/play"
     else
       @errors = []
@@ -59,7 +58,7 @@ class BoardsController < ApplicationController
 
   def overlapping?(board, potential_coords)
     placed_ships = board.ships.select { |ship| ship.cells.count > 0 }
-    return true if placed_ships.empty?
+    return false if placed_ships.empty?
 
     placed_ships.each do |ship|
       ship.cells.each do |cell|
@@ -71,7 +70,7 @@ class BoardsController < ApplicationController
   end
 
   def valid_coordinates?(coords)
-    Board::LETTERS.include?(coords[0]) && Board::NUMBERS.include?(coords[1]) && coords.length == 2
+    coords.length == 2 && Board::LETTERS.include?(coords[0]) && Board::NUMBERS.include?(coords[1])
   end
 
 
@@ -91,15 +90,17 @@ class BoardsController < ApplicationController
         count += 1
       end
 
-    else
+    elsif direction == "right"
       count = 0
       index = Board::NUMBERS.index(starting_coordinate[1]) + 1
 
       while count <= cells_to_add do
         return false if Board::NUMBERS.length == index + count
-        cells << (Board::NUMBERS[index + count] + starting_coordinate[0])
+        cells << (starting_coordinate[0] + Board::NUMBERS[index + count])
         count += 1
       end
+    else
+      false
     end
 
     cells << starting_coordinate
