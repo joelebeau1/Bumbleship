@@ -10,4 +10,15 @@ class Game < ApplicationRecord
   def over?
     boards.any? { |board| board.ships_all_sunk? }
   end
+
+  def current_player
+    #TODO >> sub 1 for session[:player_id] once player and session logic is in place
+    Player.find(1)
+  end
+
+  def opp_board
+    boards.find do |board|
+      board.player != self.current_player
+    end
+  end
 end

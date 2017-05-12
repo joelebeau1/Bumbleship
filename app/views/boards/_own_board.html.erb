@@ -1,0 +1,19 @@
+<div class="own-board-container">
+  <p><%= @own_board.player.name %>: This is Your Board</p>
+  <table class="own-board">
+    <tr>
+      <th class="index-label"></th>
+      <% (0..9).each do |column| %>
+        <th class="index-label"><%= column.to_s %></th>
+      <% end %>
+    </tr>
+    <% @own_board.rows.each do |row| %>
+    <tr>
+      <td class="index-label"><%= row.first.coordinates[0] %></td>
+      <% row.each do |cell| %>
+        <td class="<%= cell.own_status %>"></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+</div>

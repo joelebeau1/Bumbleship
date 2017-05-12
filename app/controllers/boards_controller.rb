@@ -1,15 +1,11 @@
 class BoardsController < ApplicationController
-
-  def setup
-
-  end
-
   def play
     @game = Game.find(params[:game_id])
     @own_board = Board.find(params[:id])
-    @opp_board = (@game.boards - [@own_board]).first
-    # TODO: put this in the correct view file
-    render "_fire_form"
+    @opp_board = @game.opp_board
+  end
+
+  def setup
   end
 
   def update
@@ -46,7 +42,6 @@ class BoardsController < ApplicationController
   def board_params
     params.require
   end
-
 
   # STYLES: input text field font size; side-by-side?
 
