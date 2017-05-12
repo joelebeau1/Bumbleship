@@ -31,8 +31,7 @@ class GamesController <  ApplicationController
     #TODO uncomment so we can use this after styling is set
     @game = Game.find(params[:id])
     if @game.over?
-      redirect_to game_board_play_path(@game)
-    else
+      session[:player_id] = nil
       @winner = @game.winner
       @player_1 = @game.players.first
       @player_2 = @game.players.last
@@ -42,6 +41,11 @@ class GamesController <  ApplicationController
       @player_2_hit_miss_ratio = @player_2.boards.find_by(game_id: @game.id).hit_miss_ratio
       @first_ship_sunk = @game.first_ship_sunk
       @last_ship_sunk = @game.last_ship_sunk
+    else
+      # game not over, redirect to board play page
+      player = Player.find(session[:player_id])
+      board = player.boards.find_by(game_id: @game.id)
+      redirect_to game_board_play_path(@game, board)
     end
   end
 end
