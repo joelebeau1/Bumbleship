@@ -29,13 +29,7 @@ Ship.create(name: "stacy_ship_5", length: 5, board: stacy_board)
 
 joe_board.save
 
-p joe_board
-p joe_board.errors.full_messages
-
 stacy_board.save
-
-p stacy_board
-p stacy_board.errors.full_messages
 
 joe_board.generate_cells
 stacy_board.generate_cells

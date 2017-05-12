@@ -7,6 +7,9 @@ class Game < ApplicationRecord
   validates :players, length: { maximum: 2 }
   validates :boards, length: { maximum: 2 }
 
+  def over?
+    boards.any? { |board| board.ships_all_sunk? }
+  end
 
   def current_player
     #TODO >> sub 1 for session[:player_id] once player and session logic is in place

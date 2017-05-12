@@ -26,4 +26,21 @@ describe "Ship" do
       expect(bad_ship.errors.messages[:length]).to_not be_empty
     end
   end
+  describe "#sunk?" do
+    let(:unsunk_ship) { build(:ship) }
+    xit "returns false when has no guesses" do
+      unsunk_ship.cells << build(:cell) << build(:cell)
+      expect(unsunk_ship.sunk?).to be false
+    end
+    xit "returns false when guesses less than total ship length" do
+      unsunk_ship.cells << build(:cell) << build(:cell)
+      unsunk_ship.cells.first.guessed = true
+      expect(unsunk_ship.sunk?).to be false
+    end
+    xit "returns true when guesses equal total ship length" do
+      unsunk_ship.cells << build(:cell) << build(:cell)
+      unsunk_ship.cells.each { |cell| cell.guessed = true }
+      expect(unsunk_ship.sunk?).to be true
+    end
+  end
 end

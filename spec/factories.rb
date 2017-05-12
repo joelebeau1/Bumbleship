@@ -25,6 +25,7 @@ FactoryGirl.define do
 
   factory :cell do
     guessed { [true, false].sample }
+    coordinates "A2"
   end
 
   factory :ship do

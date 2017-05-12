@@ -25,6 +25,11 @@ class Board < ApplicationRecord
     return rows
   end
 
+
+  def guess(coordinates)
+    cells.find_by(coordinates: coordinates.upcase).fire_on
+  end
+
   def coordinates
     coordinates = []
     LETTERS.each do |letter|
@@ -41,4 +46,11 @@ class Board < ApplicationRecord
     end
     self.save
   end
+
+  def ships_all_sunk?
+    ships.all? { |ship| ship.sunk? }
+  end
+
+  private
+
 end
