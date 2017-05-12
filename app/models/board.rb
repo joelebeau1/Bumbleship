@@ -37,7 +37,7 @@ class Board < ApplicationRecord
 
   def generate_cells
     coordinates.each do |pair|
-      self.cells << Cell.create(coordinates: pair, guessed: false)
+      self.cells.create(coordinates: pair, guessed: false)
     end
     self.save
   end
