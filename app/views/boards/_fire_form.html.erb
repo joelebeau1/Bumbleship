@@ -1,6 +1,8 @@
-<div class="misfire"><%= @fire_error if @fire_error %></div>
-<%= form_tag(game_board_fire_path(@game, @own_board), method: "patch", class: "fire-form") do %>
-  <%= label_tag(:coordinates, "Enter the coordinates for your shot") %>
-  <%= text_field_tag :coordinates, @coords %>
-<%= submit_tag "FIRE!", :id => "fire", :name => "submit", :class => "form_submit", :disabled => false, :disable_with => "Please wait..." %>
-<% end -%>
+<div class="fire-form-container">
+  <div class="misfire"><%= @fire_error if @fire_error %></div>
+  <%= form_tag(game_board_fire_path(@game, @own_board), method: "patch", class: "fire-form") do %>
+    <%= label_tag(:coordinates, "Enter the coordinates for your shot") %>
+    <%= text_field_tag :coordinates, @coords %>
+  <%= submit_tag "FIRE!", :id => "fire", :name => "submit", :class => "form_submit", :disabled => false, :disable_with => "Please wait..." %>
+  <% end -%>
+</div>

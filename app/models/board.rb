@@ -11,7 +11,7 @@ class Board < ApplicationRecord
   NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
   def row(letter)
-    self.cells.order(:created_at).select do |cell|
+    self.cells.order(:coordinates).select do |cell|
       cell.coordinates[0] == letter
     end
   end
