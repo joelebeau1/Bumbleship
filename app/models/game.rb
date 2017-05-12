@@ -18,14 +18,14 @@ class Game < ApplicationRecord
     winner_board.player
   end
 
-  def current_player
+  def current_player(id)
     #TODO >> sub 1 for session[:player_id] once player and session logic is in place
-    Player.find(1)
+    Player.find(id)
   end
 
-  def opp_board
+  def opp_board(id)
     boards.find do |board|
-      board.player != self.current_player
+      board.player != self.current_player(id)
     end
   end
 
