@@ -8,7 +8,7 @@
   <%= f.submit "New Game", :disable_with => 'Loading...' %>
 <% end %>
 
-<%= form_tag(join_game_path, method: "post", class: "join-form") do %>
+<%= form_tag(join_game_path, method: "get", class: "join-form") do %>
   <%= label_tag :secret_key, "Enter your secret key:" %>
   <%= text_field_tag :secret_key %>
   <%= submit_tag "Join", :disable_with => 'Joining...' %>

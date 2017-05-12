@@ -10,7 +10,7 @@ class GamesController <  ApplicationController
   def join
     secret_key = params[:secret_key]
     if (game = Game.find_by(secret_key: secret_key))
-      redirect_to new_game_player(game)
+      redirect_to new_game_player_path(game)
     else
       @errors = ["Secret key not found, matey... :("]
       render :new

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "games#index"
   get "/games/new" => "games#new", as: :new_game
   post "/games" => "games#create", as: :games
-  post "/games/join" => "games#join", as: :join_game
+  get "/games/join" => "games#join", as: :join_game
   get "/games/:id" => "games#show", as: :game_show
   get "/games/:id/players/new" => "players#new", as: :new_game_player
   post "/games/:id/players" => "players#create", as: :players
