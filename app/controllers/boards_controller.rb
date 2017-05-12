@@ -1,11 +1,11 @@
 class BoardsController < ApplicationController
   def play
     @game = Game.find(params[:game_id])
-    @board = Board.find(params[:id])
+    @own_board = Board.find(params[:id])
+    @opp_board = @game.opp_board
   end
 
   def setup
-
   end
 
   def update
