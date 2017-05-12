@@ -122,3 +122,23 @@ th, .letter {
 td, th {
   border: 1px dashed black;
 }
+
+.fire-form #coordinates {
+  display: block;
+  width: 90px;
+  margin: 10px auto;
+  text-align: center;
+  padding: 5px;
+  font-size: 2em;
+}
+.fire-form label {
+  display: block;
+  width: 180px;
+  margin: 10px auto;
+  text-align: center;
+
+}
+
+.misfire, .fire-form label {
+  font-size: 1.3em;
+}

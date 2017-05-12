@@ -17,16 +17,27 @@ class BoardsController < ApplicationController
   end
 
   def fire
+    @coords = params[:coordinates].upcase
     @game = Game.find(params[:game_id])
     @own_board = Board.find(params[:id])
-    @opp_board = (@game.boards - [@own_board]).first
-    @result = @opp_board.guess(params[:coordinates])
-    if @game.over?
-      redirect_to game_show_path(@game)
+    if @coords =~ /\A[A-J]{1}[0-9]{1}\z/
+      # coordinates are correctly formatted
+      @opp_board = (@game.boards - [@own_board]).first
+      @result = @opp_board.guess(@coords)
+      if @game.over?
+        # there is a winner, go to game show page
+        redirect_to game_show_path(@game)
+      else
+        # TODO: hook up with WebSockets here
+        p @result
+        flash[:notice] = "We'll change this later, but for now the result is #{@result}"
+        redirect_to game_board_play_path(@game, @own_board)
+      end
     else
-      # TODO: hook up with WebSockets here
-      flash[:notice] = "We'll change this later, but for now the result is #{@result}"
-      redirect_to game_board_play_path(@game, @own_board)
+      # coordinates entered in error
+      @fire_error = "Yarr, those don't be seaworthy coordinates"
+      # TODO: update this to be the correct view file
+      render "_fire_form"
     end
   end
 
