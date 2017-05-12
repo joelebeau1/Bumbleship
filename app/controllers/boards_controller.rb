@@ -21,11 +21,12 @@ class BoardsController < ApplicationController
     @own_board = Board.find(params[:id])
     @opp_board = (@game.boards - [@own_board]).first
     @result = @opp_board.guess(params[:coordinates])
-    if game.over?
-      redirect_to game_show_path(game)
+    if @game.over?
+      redirect_to game_show_path(@game)
     else
       # TODO: hook up with WebSockets here
-      render game_board_play(@game, @own_board)
+      flash[:notice] = "We'll change this later, but for now the result is #{@result}"
+      redirect_to game_board_play_path(@game, @own_board)
     end
   end
 

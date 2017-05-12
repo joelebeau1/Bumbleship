@@ -1,4 +1,4 @@
-<%= form_tag(game_board_fire_path(@game, @own_board), method: "patch") do %>
+<%= form_tag(game_board_fire_path(@game, @own_board), method: "patch"), class: "" do %>
   <%= label_tag(:coordinates, "Enter the coordinates for your shot") %>
   <%= text_field_tag :coordinates %>
 <%= submit_tag "FIRE!", :id => "fire", :name => "submit", :class => "form_submit", :disabled => false, :disable_with => "Please wait..." %>

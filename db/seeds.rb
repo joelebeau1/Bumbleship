@@ -26,7 +26,9 @@ Ship.create!(name: "test", length: 3, board: stacy_board)
 Ship.create!(name: "test", length: 3, board: stacy_board)
 
 joe_board.save
+joe_board.generate_cells
 stacy_board.save
+stacy_board.generate_cells
 game.save
 
 

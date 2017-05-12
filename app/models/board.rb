@@ -28,7 +28,7 @@ class Board < ApplicationRecord
 
 
   def guess(coordinates)
-    cells.find_by(coordinates: coordinates).fire_on
+    cells.find_by(coordinates: coordinates.upcase).fire_on
   end
 
   def coordinates
@@ -46,6 +46,10 @@ class Board < ApplicationRecord
       self.cells << Cell.create(coordinates: pair, guessed: false)
     end
     self.save
+  end
+
+  def ships_all_sunk?
+    ships.all? { |ship| ship.sunk? }
   end
 
   private
