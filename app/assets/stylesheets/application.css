@@ -85,23 +85,53 @@ td, th {
 }
 
 /* CELL STATUS DISPLAY STYLES */
+
+/* to discuss:  blue background on all, or only water?
+                cell coordinates on all, or only water?
+                coordinates on own board?
+                coordinates on setup board?
+*/
 .water {
   background-color: #ABD4DD;
 }
 
 .ship {
+  background-color: #ABD4DD;
+  background-image: url("cell-display/ship.ico");
+  background-size: 100% 100%;
+}
 
+.ship span {
+  display: none;
 }
 
 .hit {
+  background-color: #ABD4DD;
+  background-image: url("cell-display/hit.png");
+  background-size: 100% 100%;
+}
 
+.hit span {
+  display: none;
 }
 
 .miss {
+  background-color: #ABD4DD;
+  background-image: url("cell-display/miss.png");
+  background-size: 100% 100%;
+}
 
+.miss span {
+  display: none;
 }
 
 /* OPPONENT BOARD STYLES */
+.opp-board-header {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
 .opp-board-container {
   display: inline-block;
   vertical-align: top;

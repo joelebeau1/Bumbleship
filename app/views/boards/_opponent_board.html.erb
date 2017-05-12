@@ -1,5 +1,5 @@
 <div class="opp-board-container">
-  <p>Here's your progress in guessing against <%= @opp_board.player.name %>'s board:</p>
+  <p class="opp-board-header"><%= @opp_board.player.name %>'s board:</p>
   <table class="opp-board">
     <tr>
       <th class="index-label"></th>
@@ -11,7 +11,7 @@
     <tr>
       <td class="index-label"><%= row.first.coordinates[0] %></td>
       <% row.each do |cell| %>
-        <td class="<%= cell.opponent_status %>"></td>
+        <td class="<%= cell.opponent_status %>"><span><%= cell.coordinates %></span></td>
       <% end %>
     </tr>
     <% end %>
