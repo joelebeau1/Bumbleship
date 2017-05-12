@@ -17,7 +17,6 @@
 * {
   font-family: 'IM Fell English SC', serif;
   color: #37220D;
-  /*background-color: rgba(1 .8 .7 .5)*/
 }
 
 ol {
@@ -49,7 +48,7 @@ input[type=radio]:checked::before{
 }
 
 body {
-  max-width: 900px;
+  /*max-width: 900px;*/
   display: block;
   margin: 0 auto;
 }
@@ -63,38 +62,97 @@ h1 {
   border-bottom: 1px solid #37220D;
 }
 
-table {
-  border: 1px solid black;
-  min-width: 800px;
-  min-height: 800px;
+.container {
+  width: 90%;
+  text-align: center;
   margin: auto;
 }
 
-th, .letter {
-  font-size: 2.0em;
+/* STYLES FOR ALL BOARDS */
+table {
+  border: none;
+  margin: auto;
+}
+
+td, th {
+  border: 1px dashed #37220D;
   text-align: center;
 }
 
-.setup-board {
+.index-label {
+  border: none;
+  background-color: none;
+}
+
+/* CELL STATUS DISPLAY STYLES */
+.water {
+  background-color: #ABD4DD;
+}
+
+.ship {
+
+}
+
+.hit {
+
+}
+
+.miss {
+
+}
+
+/* OPPONENT BOARD STYLES */
+.opp-board-container {
+  display: inline-block;
+  vertical-align: top;
+  width: 70%;
+}
+
+.opp-board {
+  min-width: 700px;
+  min-height: 700px;
+}
+
+.opp-board td, th {
+  height: 50px;
+  width: 50px;
+  font-size: 1.1em;
+}
+
+.opp-board th {
+  font-size: 1.5em;
+}
+
+/* OWN BOARD STLYES */
+.own-board-container {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 25%;
+}
+
+.own-board {
   min-width: 300px;
   min-height: 300px;
+  font-size: 1.1em;
 }
 
-.setup-board td {
-  font-size: 1.2em;
+.own-board td, th {
+  height: 25px;
+  width: 25px;
 }
 
-.container {
-  text-align: center;
+.own-board th {
+  font-size: 1.4em;
 }
 
+/* SETUP BOARD STYLES */
 .setup-container {
   font-size: 1.2em;
   width: 59%;
   display: inline-block;
   vertical-align: top;
   text-align: left;
-    margin: 10px;
+  margin: 10px;
 }
 
 .setup-board-container {
@@ -104,21 +162,39 @@ th, .letter {
   margin: 10px;
 }
 
-
-td, th {
-  border: 1px dashed #37220D;
+.setup-board {
+  min-width: 300px;
+  min-height: 300px;
 }
 
-table {
-  border: 1px solid black;
-  min-width: 800px;
-  min-height: 800px;
+.setup-board td, th {
+  height: 25px;
+  width: 25px;
+  font-size: 1.1em;
 }
 
-th, .letter {
-  font-size: 2.0em;
+.setup-board th {
+  font-size: 1.4em;
 }
 
-td, th {
-  border: 1px dashed black;
+
+.fire-form #coordinates {
+  display: block;
+  width: 90px;
+  margin: 10px auto;
+  text-align: center;
+  padding: 5px;
+  font-size: 2em;
 }
+.fire-form label {
+  display: block;
+  width: 180px;
+  margin: 10px auto;
+  text-align: center;
+
+}
+
+.misfire, .fire-form label {
+  font-size: 1.3em;
+}
+

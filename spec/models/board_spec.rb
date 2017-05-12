@@ -18,7 +18,7 @@ describe "Board" do
       expect(six_ship_board.errors.messages[:ships]).to_not be_empty
     end
   end
-  describe "generate_cells" do
+  describe "#generate_cells" do
     before(:each) do
       @board = build(:board)
       @board.player = build(:player)
@@ -39,6 +39,18 @@ describe "Board" do
     it "contains no duplicate coordinates" do
       all_coordinates = @board.cells.pluck(:coordinates)
       expect(all_coordinates.uniq.length).to eq 100
+    end
+  end
+
+  describe "#guess" do
+    describe "when the game is not over" do
+      it "returns 'guessed' if cell was already guessed"
+      it "returns 'miss' if that cell does not contain a ship"
+      it "returns 'hit' if a ship is hit but not sunk"
+      it "returns the ship's name if the ship is sunk"
+    end
+    describe "when the game is over" do
+      it "displays"
     end
   end
 end
