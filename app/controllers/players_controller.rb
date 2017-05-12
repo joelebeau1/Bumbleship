@@ -14,6 +14,7 @@ class PlayersController <  ApplicationController
     p params
     @player = Player.new(player_params)
     if @player.save
+      session[:player_id] @player_1.id
       # TODO maybe: refactor board and ship creation/linking into after_save callback for player?
       @board = Board.new
       @board.player = @player
