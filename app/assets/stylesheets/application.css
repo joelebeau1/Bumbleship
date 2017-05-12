@@ -106,6 +106,7 @@ td, th {
   display: inline-block;
   vertical-align: top;
   width: 70%;
+  float: right;
 }
 
 .opp-board {
@@ -123,11 +124,16 @@ td, th {
   font-size: 1.5em;
 }
 
+.fire-form-and-own-board-container {
+  width: 25%;
+  float: left;
+}
+
 /* OWN BOARD STLYES */
 .own-board-container {
   display: inline-block;
   vertical-align: bottom;
-  width: 25%;
+  margin-top: 100px;
 }
 
 .own-board {
@@ -177,6 +183,11 @@ td, th {
   font-size: 1.4em;
 }
 
+/* FIRE FORM STYLES */
+.fire-form-container {
+  display: inline-block;
+  vertical-align: top;
+}
 
 .fire-form #coordinates {
   display: block;
@@ -186,12 +197,12 @@ td, th {
   padding: 5px;
   font-size: 2em;
 }
+
 .fire-form label {
   display: block;
   width: 180px;
   margin: 10px auto;
   text-align: center;
-
 }
 
 .misfire, .fire-form label {
