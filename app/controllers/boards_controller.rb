@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   def play
     @game = Game.find(params[:game_id])
     @own_board = Board.find(params[:id])
-    @opp_board = @game.opp_board
+    @opp_board = @game.opp_board(session[:player_id])
   end
 
   def setup
@@ -31,7 +31,11 @@ class BoardsController < ApplicationController
       # break if ship.errors.any?
       coordinates.each do |coords|
         # BUG: binding.pry was not hit when run from this linke
-        ship.cells << @board.cells.where(coordinates: coords).first
+        p "&&&&&&&&&&&&&&&&&&&&"
+        p ship.cells
+        p @board.cells.where(coordinates: coords).first
+        p "&&&&&&&&&&&&&&&&&&&&"
+        ship.cells << @board.cells.where(coordinates: coords.upcase).first
         ship.save
       end
     end
@@ -89,9 +93,13 @@ class BoardsController < ApplicationController
     direction = attributes[:alignment]
     cells_to_add = attributes[:length].to_i - 1
 
+    p "*(((((*())(**(&*(Y&(*"
+    p starting_coordinate
+    p "*(((((*())(**(&*(Y&(*"
+
     if direction == "down"
       count = 0
-      index = Board::LETTERS.index(starting_coordinate[0]) + 1
+      index = Board::LETTERS.index(starting_coordinate[0].upcase) + 1
 
       while count < cells_to_add do
         return false if Board::LETTERS.length == index + count

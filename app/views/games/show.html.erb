@@ -1,0 +1,30 @@
+<h2><%= @winner.name %> wins!</h2>
+<div class="stats">
+  <h3>Stats for this game:</h3>
+  <table>
+    <tr>
+      <th>Players:</th>
+      <th><%= @player_1.name %></th>
+      <th><%= @player_2.name %></th>
+    </tr>
+    <tr>
+      <td>Total Shots Fired:</td>
+      <td><%= @player_1_total_shots_fired %></td>
+      <td><%= @player_2_total_shots_fired %></td>
+    </tr>
+    <tr>
+      <td>Hit/Miss Ratio:</td>
+      <td><%= @player_1_hit_miss_ratio %></td>
+      <td><%= @player_2_hit_miss_ratio %></td>
+    </tr>
+    <tr>
+      <td>First Ship Sunk:</td>
+      <td colspan="2"><%= @first_ship_sunk.player.name %>'s <%= @first_ship_sunk.name %></td>
+    </tr>
+    <tr>
+      <td>Last Ship Sunk:</td>
+      <td colspan="2"><%= @last_ship_sunk.player.name %>'s <%= @last_ship_sunk %></td>
+    </tr>
+  </table>
+</div>
+<%= button_to "Start a new game", new_game_path %>

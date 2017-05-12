@@ -14,17 +14,17 @@ class PlayersController <  ApplicationController
     p params
     @player = Player.new(player_params)
     if @player.save
+      session[:player_id] = @player.id
       # TODO maybe: refactor board and ship creation/linking into after_save callback for player?
       @board = Board.new
       @board.player = @player
       @game = Game.find(params[:id])
       @board.game = @game
-      # TODO: incorporate correct ship names and sizes from Joe and Tove's code
-      @board.ships = [Ship.create(name: "TODO", length: 2),
-                      Ship.create(name: "TODO", length: 3),
-                      Ship.create(name: "TODO", length: 3),
-                      Ship.create(name: "TODO", length: 4),
-                      Ship.create(name: "TODO", length: 5)]
+      Ship.create(name: "Queen Anne's Revenge", length: 5, board: @board)
+      Ship.create(name: "Frigate", length: 4, board: @board)
+      Ship.create(name: "Galleon", length: 3, board: @board)
+      Ship.create(name: "Sloop", length: 2, board: @board)
+      Ship.create(name: "Galley", length: 3, board: @board)
       if @board.save
         # TODO maybe: refactor generate_cells into after_save callback for board?
         @board.generate_cells

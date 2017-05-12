@@ -34,6 +34,12 @@ class Cell < ApplicationRecord
     return "guessed" if guessed
     update(guessed: true)
     return "miss" unless ship
-    ship.sunk? ? ship.name : "hit"
+
+    if ship.sunk?
+      ship.update(sunk_time: Time.current)
+      ship.name
+    else
+      "hit"
+    end
   end
 end
