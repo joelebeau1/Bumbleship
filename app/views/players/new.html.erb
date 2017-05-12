@@ -1,0 +1,29 @@
+<div class="players-list">
+  Players already in this game:
+  <ul>
+    <% @game.players.each do |player| %>
+      <li><%= player.name %></li>
+    <% end %>
+  </ul>
+</div>
+<% if @errors %>
+  <ul class="error-list">
+    <% @errors.each do |error| %>
+      <li class="error"><%= error %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <%= form_for(Player.new) do |f| %>
+    <%= f.label :name, "What be y'r pirate name?" %>
+    <%= f.text_field :name %>
+    <%= f.submit "Sign In", :disable_with => 'Signing In...' %>
+  <% end %>
+  <div class="secret-key-msg">
+    <p>This game's secret key is:</p>
+    <div class="secret-key"><%= @game.secret_key %></div>
+    <p>Share it with a friend so they can join your game, or send them this link:</p>
+    <%= link_to "Join my game", join_game_path(secret_key: @game.secret_key) %>
+    <p>Or <a href="mailto:?subject=Join%20my%20bumbleship%20game&amp;body=Click%20this%20link%20to%20join%20my%20game%20%20<%= join_game_path(secret_key: @game.secret_key) %>">email it to them directly</a></p>
+  </div>
+<% end %>
+

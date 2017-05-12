@@ -7,10 +7,6 @@ describe "Game" do
         game = Game.new(secret_key: "123456")
         game.valid?
         expect(game.errors.messages[:secret_key]).to be_empty
-
-        empty_game = Game.new
-        empty_game.valid?
-        expect(empty_game.errors.messages[:secret_key]).to_not be_empty
       end
 
       it 'must be 6 characters long' do
