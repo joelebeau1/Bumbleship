@@ -9,7 +9,42 @@ class BoardsController < ApplicationController
   end
 
   def update
-    p params
+    @board = Board.find(params[:id])
+    board_params.each do |_placeholder, attributes|
+      ship = @board.ships.where(name: attributes[:name]).first
+      # unless valid_coordinates?(attributes[:coordinate])
+      #   ship.errors[:base] << "Invalid starting coordinate for your #{attributes[:name]}, please choose a valid coordinate"
+      #   ship.save
+      # end
+      # break if ship.errors.any?
+      # puts "#{ship.name} AFTER BREAK ONE ================"
+
+      coordinates = coordinates_occupied(ship, attributes)
+      # break if !coordinates
+      # puts "#{ship.name} AFTER BREAK TWo ================"
+
+      # if overlapping?(@board, coordinates)
+      #   ship.errors[:base] << "Your #{attributes[:name]} is overlapping with another ship, please choose a different place for your #{attributes[:name]}"
+      #   ship.save
+      # ship.save
+      # end
+      # break if ship.errors.any?
+      coordinates.each do |coords|
+        # BUG: binding.pry was not hit when run from this linke
+        ship.cells << @board.cells.where(coordinates: coords).first
+        ship.save
+      end
+    end
+
+    # if all_ships_valid?(@board)
+      @board.save
+      Game.find(params[:game_id]).save
+      redirect_to "/games/#{params[:game_id]}/boards/#{params[:id]}/play"
+    # else
+    #   @errors = []
+    #   @board.ships.each { |ship| @errors << ship.errors.full_messages }
+    #   render 'setup'
+    # end
   end
 
   def fire
@@ -25,7 +60,6 @@ class BoardsController < ApplicationController
         redirect_to game_show_path(@game)
       else
         # TODO: hook up with WebSockets here
-        p @result
         flash[:notice] = "We'll change this later, but for now the result is #{@result}"
         redirect_to game_board_play_path(@game, @own_board)
       end
@@ -38,26 +72,49 @@ class BoardsController < ApplicationController
   end
 
   private
-
   def board_params
-    params.require
+    params.require(:board).permit(ship1: [:name, :coordinate, :length, :alignment], ship2: [:name, :coordinate, :length, :alignment], ship3: [:name, :coordinate, :length, :alignment], ship4: [:name, :coordinate, :length, :alignment], ship5: [:name, :coordinate, :length, :alignment])
   end
 
-  # STYLES: input text field font size; side-by-side?
+  # def all_ships_valid?(board)
+  #   board.ships.each do |ship|
+  #     return false if ship.errors.any?
+  #   end
+  #   true
+  # end
 
-  # Iterate through form fields
+  def coordinates_occupied(ship, attributes)
+    cells = []
+    starting_coordinate = attributes[:coordinate]
+    direction = attributes[:alignment]
+    cells_to_add = attributes[:length].to_i - 1
 
-  # Pull coordinates & orientation from form
+    if direction == "down"
+      count = 0
+      index = Board::LETTERS.index(starting_coordinate[0]) + 1
 
-  # Error check:
-    # Valid coordinate
-    # Overlaps already placed ships
-    # Extending past edge of board
+      while count < cells_to_add do
+        return false if Board::LETTERS.length == index + count
+        cells << (Board::LETTERS[index + count] + starting_coordinate[1])
+        count += 1
+      end
 
-  # If valid...
-    # Calculate cells occupied by ship & associate
+    elsif direction == "right"
+      count = 0
+      index = Board::NUMBERS.index(starting_coordinate[1]) + 1
 
-  # If invalid...
-    # Add custom error message to ship with ship name, reason for error
+      while count < cells_to_add do
+        return false if Board::NUMBERS.length == index + count
+        cells << (starting_coordinate[0] + Board::NUMBERS[index + count])
+        count += 1
+      end
+    else
+      false
+    end
+
+    cells << starting_coordinate
+    cells
+  end
+
 
 end
