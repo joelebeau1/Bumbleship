@@ -1,0 +1,19 @@
+<div class="opp-board-container">
+  <p>Here's your progress in guessing against <%= @opp_board.player.name %>'s board:</p>
+  <table class="opp-board">
+    <tr>
+      <th class="index-label"></th>
+      <% (0..9).each do |column| %>
+        <th class="index-label"><%= column.to_s %></th>
+      <% end %>
+    </tr>
+    <% @opp_board.rows.each do |row| %>
+    <tr>
+      <td class="index-label"><%= row.first.coordinates[0] %></td>
+      <% row.each do |cell| %>
+        <td class="<%= cell.opponent_status %>"></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+</div>
