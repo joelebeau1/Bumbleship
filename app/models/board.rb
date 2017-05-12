@@ -44,5 +44,4 @@ class Board < ApplicationRecord
     end
     self.save
   end
->>>>>>> master
 end

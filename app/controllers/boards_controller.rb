@@ -7,13 +7,12 @@ class BoardsController < ApplicationController
   def play
 
   end
-# "ship4"=>{"name"=>"Frigate", "coordinate"=>"A2", "length"=>"4", "alignment"=>"down"}
+
   def update
     @board = Board.find(params[:id])
 
     params[:board].each_pair do |ship_num, attributes|
-      ship = @board.ships.where(name: attributes[:name])
-
+      ship = @board.ships.where(name: attributes[:name]).first
       if !valid_coordinates?(attributes[:coordinate])
         ship.errors[:base] << "Invalid starting coordinate for your #{attributes[:name]}, please choose a valid coordinate"
       end
@@ -32,13 +31,26 @@ class BoardsController < ApplicationController
       end
     end
 
-
-
+    if all_ships_valid?(@board)
+      redirect_to "/games/#{params[:game_id]}/boards/#{params[:id]}/play"
+    else
+      @errors = []
+      @board.ships.each { |ship| @errors << ship.errors.full_messages }
+      render 'setup'
+    end
   end
 
   private
   def board_params
     params.require(:board).permit(ships_attributes: [:coordinate, :length, :alignment, :name])
+  end
+
+  def all_ships_valid?(board)
+    board.ships.each do |ship|
+      return false if ship.errors.any?
+      ship.save
+    end
+    true
   end
 
   def overlapping?(board, potential_coords)
@@ -55,35 +67,33 @@ class BoardsController < ApplicationController
   end
 
   def valid_coordinates?(coords)
-    LETTERS.include?(coords[0]) && NUMBERS.include?(coords[1]) && coords.length == 2
+    Board::LETTERS.include?(coords[0]) && Board::NUMBERS.include?(coords[1]) && coords.length == 2
   end
 
-LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
   def coordinates_occupied(args)
     cells = []
     starting_coordinate = args[:coordinate]
     direction = args[:alignment]
-    cells_to_add = args[:length] - 1
+    cells_to_add = args[:length].to_i - 1
 
     if direction == "down"
       count = 0
-      index = LETTERS.index(starting_coordinate[0]) + 1
+      index = Board::LETTERS.index(starting_coordinate[0]) + 1
 
       while count <= cells_to_add do
-        return false if LETTERS.length == index + count
-        cells << (LETTERS[index + count] + starting_coordinate[1]
+        return false if Board::LETTERS.length == index + count
+        cells << (Board::LETTERS[index + count] + starting_coordinate[1])
         count += 1
       end
 
-    elsif direction == "right"
+    else
       count = 0
-      index = NUMBERS.index(starting_coordinate[1]) + 1
+      index = Board::NUMBERS.index(starting_coordinate[1]) + 1
 
       while count <= cells_to_add do
-        return false if NUMBERS.length == index + count
-        cells << (NUMBERS[index + count] + starting_coordinate[0]
+        return false if Board::NUMBERS.length == index + count
+        cells << (Board::NUMBERS[index + count] + starting_coordinate[0])
         count += 1
       end
     end
@@ -94,13 +104,3 @@ NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 end
-  # Error check:
-    # Valid coordinate DONE
-    # Overlaps already placed ships
-    # Extending past edge of board DONE
-
-  # If valid...
-    # Create cells with coordinates and associate
-
-  # If invalid...
-    # Add custom error message to ship with ship name, reason for error
